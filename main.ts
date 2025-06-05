@@ -1063,6 +1063,34 @@ function Tutorial () {
     0,
     2
     ))
+    Info.setStyleProperty(miniMenu.StyleKind.Default, miniMenu.StyleProperty.BorderColor, 15)
+    Info.setStyleProperty(miniMenu.StyleKind.Selected, miniMenu.StyleProperty.BorderColor, 1)
+    Info.setStyleProperty(miniMenu.StyleKind.DefaultAndSelected, miniMenu.StyleProperty.Background, 12)
+    Info.onSelectionChanged(function (selection, selectedIndex) {
+        story.clearAllText()
+    })
+    Info.onButtonPressed(controller.A, function (selection, selectedIndex) {
+        if (selectedIndex == 0) {
+            story.printText("Use w/a/s/d or arrow keys to move and a/space or b/enter to interact", Info.x + 40, Info.y, 15, 1, story.TextSpeed.Normal)
+        } else if (selectedIndex == 1) {
+            story.printText("When on top of some objects it will allow you to interact with them by pressing a or b (only tells you on night 1)", Info.x + 40, Info.y, 15, 1, story.TextSpeed.Normal)
+        } else if (selectedIndex == 2) {
+            story.printText("Press A to enter and b to exit cameras", Info.x + 40, Info.y, 15, 1, story.TextSpeed.Normal)
+        } else if (selectedIndex == 3) {
+            color.FadeToBlack.startScreenEffect()
+            pause(5000)
+            Info.close()
+            color.startFadeFromCurrent(color.originalPalette)
+            color.pauseUntilFadeDone()
+            Tips_For_Us()
+            screenTransitions.startTransition(screenTransitions.Horizontal, 10000, true, true)
+            color.FadeToBlack.startScreenEffect()
+            pause(5000)
+            color.startFadeFromCurrent(color.originalPalette)
+            Nighttutorial()
+            color.pauseUntilFadeDone()
+        }
+    })
 }
 let Info: miniMenu.MenuSprite = null
 let Start_text: TextSprite = null
