@@ -1,3 +1,8 @@
+namespace StatusBarKind {
+    export const Am = StatusBarKind.create()
+    export const Power = StatusBarKind.create()
+    export const Drain = StatusBarKind.create()
+}
 function Tips_For_Us () {
     Random_Backgrounds = [
     img`
@@ -761,7 +766,7 @@ function Start_menu () {
     if (!(blockSettings.exists("Have played the game before"))) {
         myMenu.setPosition(40, 60)
     } else if (blockSettings.exists("Have played the game before")) {
-        myMenu.setPosition(80, 60)
+        myMenu.setPosition(55, 60)
     }
     myMenu.setMenuStyleProperty(miniMenu.MenuStyleProperty.Width, 50)
     myMenu.setMenuStyleProperty(miniMenu.MenuStyleProperty.Height, 100)
@@ -792,6 +797,9 @@ function Start_menu () {
             color.startFadeFromCurrent(color.originalPalette)
             Tutorial()
             color.pauseUntilFadeDone()
+        }
+        if (selection == "Continue Game " + convertToText(Nights)) {
+        	
         }
         if (!(blockSettings.exists("Have played the game before"))) {
             if (selection == "Settings") {
@@ -897,8 +905,7 @@ function Nighttutorial () {
     story.printCharacterText("That's it this was a very bad tutorial and I might make someone redo it in the future", "Tutorial")
     blockSettings.writeString("Have played the game before", "Yes")
     blockSettings.writeNumber("Current Night", 1)
-    tiles.setCurrentTilemap(tilemap`level2`)
-    Start_menu()
+    game.reset()
 }
 function Intro () {
     scene.setBackgroundImage(img`
@@ -1103,10 +1110,10 @@ let Random_Backgrounds: Image[] = []
 let Nights = 0
 Nights = blockSettings.readNumber("Current Night")
 let In_game = 0
-let Animatronic_Movement = statusbars.create(0, 0, StatusBarKind.Health)
-let Power_Bar = statusbars.create(0, 0, StatusBarKind.Health)
+let Animatronic_Movement = statusbars.create(0, 0, StatusBarKind.Am)
+let Power_Bar = statusbars.create(0, 0, StatusBarKind.Power)
 Power_Bar.value = 100
-let Power_Drain = statusbars.create(0, 0, StatusBarKind.Health)
+let Power_Drain = statusbars.create(0, 0, StatusBarKind.Drain)
 if (!(blockSettings.exists("Have played the game before"))) {
     blockSettings.writeString("Difficulty", "Normal")
     Intro()
